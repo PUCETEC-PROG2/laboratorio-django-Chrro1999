@@ -5,4 +5,9 @@ from .models import Pokemon
 class PokemonAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(Trainer)
+class PokemonAdmin(admin.ModelAdmin):
+    pass
+
+
 # Register your models here.
