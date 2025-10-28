@@ -2,13 +2,13 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Pokemon, Trainer    
 
-
 def index(request):
     pokemons = Pokemon.objects.all()
+    trainers = Trainer.objects.all()  
     template = loader.get_template('index.html')
-    return HttpResponse(template.render({'pokemons': pokemons, 'trainers':trainer}, request))
+    return HttpResponse(template.render({'pokemons': pokemons, 'trainers': trainers}, request))
 
-def pokemon(request, pokemon, id:int):
+def pokemon(request, id:int):  
     pokemon = Pokemon.objects.get(id=id)
     template = loader.get_template('display_pokemon.html')
     context = {
@@ -21,5 +21,14 @@ def trainer(request, id:int):
     template = loader.get_template('display_trainer.html')
     context = {
         'trainer': trainer
+    }
+    return HttpResponse(template.render(context, request))
+
+# ✅ AGREGAR esta vista que falta para la ruta pokedex/
+def pokedex(request):
+    pokemons = Pokemon.objects.all()
+    template = loader.get_template('pokedex.html')  
+    context = {
+        'pokemons': pokemons
     }
     return HttpResponse(template.render(context, request))

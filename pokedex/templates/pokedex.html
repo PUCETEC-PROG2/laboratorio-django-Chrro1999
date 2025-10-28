@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Pokédex Completa</h1>
+
+<h3>Pokémons disponibles</h3>
+<ul class="list-group">
+    {% for pokemon in pokemons %}
+    <li class="list-group-item">
+        <a href="{% url 'pokemon' pokemon.id %}">{{ pokemon.name | capfirst }}</a>
+        - Tipo: {{ pokemon.type }} - Nivel: {{ pokemon.level }}
+    </li>
+    {% endfor %}
+</ul>
+
+<br>
+<a href="{% url 'index' %}" class="btn btn-secondary">Volver al inicio</a>
+{% endblock content %}
