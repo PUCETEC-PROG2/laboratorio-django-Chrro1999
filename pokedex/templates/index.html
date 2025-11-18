@@ -1,15 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-<p class="p-2">Hola, este es tu primer sitio en Django</p>
+<p class="p-2">BIenvenido al pokedex</p>
 
 <h3>Pokémons disponibles</h3>
 <ul class="list-group">
     {% for pokemon in pokemons %}
     <li class="list-group-item">
-        <a href="pokemon/{{pokemon.id}}">{{ pokemon.name | capfirst }}</a>
+        <div class="d-flex align-items-center">
+            {% if pokemon.picture %}
+                <img src="{{ pokemon.picture.url }}" alt="{{ pokemon.name }}" class="me-3 img-thumbnail" style="width:96px;height:96px;object-fit:cover;">
+            {% endif %}
+            <div>
+                <a href="pokemon/{{pokemon.id}}">{{ pokemon.name | capfirst }}</a>
+            </div>
+        </div>
     </li>
     {% endfor %}
 </ul>
+
+<div class="mt-3">
+    <a href="{% url 'add_pokemon' %}" class="btn btn-success"><i class="fa-solid fa-plus"></i> Agregar Pokémon</a>
+</div>
 
 <h3>Entrenadores disponibles</h3>
 <ul class="list-group">

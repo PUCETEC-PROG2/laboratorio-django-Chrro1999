@@ -1,6 +1,17 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 <p>Has elegido el pokemon: <strong>{{ pokemon.name | capfirst }}</strong></p>
+{% if pokemon.picture %}
+    <div class="mb-3 text-center">
+        <img src="{{ pokemon.picture.url }}" alt="{{ pokemon.name }}" class="img-fluid" style="max-height:300px;">
+    </div>
+{% else %}
+    <div class="mb-3 text-center">
+        <!-- Fallback to project logo if the pokemon has no picture -->
+        <img src="{% static 'pokedex-logo.png' %}" alt="No image" class="img-fluid" style="max-height:200px;">
+    </div>
+{% endif %}
 <h3>Características:</h3>
 <ul>
     <li>Nombre: {{pokemon.name}}</li>

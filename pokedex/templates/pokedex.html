@@ -1,16 +1,28 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 <h1>Pokédex Completa</h1>
 
 <h3>Pokémons disponibles</h3>
-<ul class="list-group">
+<div class="row">
     {% for pokemon in pokemons %}
-    <li class="list-group-item">
-        <a href="{% url 'pokemon' pokemon.id %}">{{ pokemon.name | capfirst }}</a>
-        - Tipo: {{ pokemon.type }} - Nivel: {{ pokemon.level }}
-    </li>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div class="card h-100 text-center">
+            {% if pokemon.picture %}
+                <img src="{{ pokemon.picture.url }}" class="card-img-top" alt="{{ pokemon.name }}" style="height:180px;object-fit:cover;">
+            {% else %}
+                <img src="{% static 'pokedex-logo.png' %}" class="card-img-top" alt="No image" style="height:180px;object-fit:contain;padding:10px;background:#fff;">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ pokemon.name | capfirst }}</h5>
+                <p class="card-text">Tipo: {{ pokemon.type }}</p>
+                <p class="card-text">Nivel: {{ pokemon.level }}</p>
+                <a href="{% url 'pokemon' pokemon.id %}" class="btn btn-primary">Ver</a>
+            </div>
+        </div>
+    </div>
     {% endfor %}
-</ul>
+</div>
 
 <br>
 <a href="{% url 'index' %}" class="btn btn-secondary">Volver al inicio</a>
