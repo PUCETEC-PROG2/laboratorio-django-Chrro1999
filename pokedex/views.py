@@ -39,6 +39,15 @@ def pokedex(request):
     return HttpResponse(template.render(context, request))
 
 
+def trainers(request):
+    trainers_list = Trainer.objects.all()
+    template = loader.get_template('trainers.html')
+    context = {
+        'trainers': trainers_list
+    }
+    return HttpResponse(template.render(context, request))
+
+
 def add_pokemon(request):
     """View to add a new Pokemon via form (handles image upload)."""
     if request.method == 'POST':

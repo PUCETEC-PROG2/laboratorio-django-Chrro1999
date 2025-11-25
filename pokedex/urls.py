@@ -7,6 +7,7 @@ urlpatterns = [
     path("pokemon/<int:id>/", views.pokemon, name="pokemon"),     
     path("trainer/<int:id>/", views.trainer, name="trainer"),    
     path("pokedex/", views.pokedex, name="pokedex"),              
+    path("trainers/", views.trainers, name="trainers"),
     path("pokemon/add/", views.add_pokemon, name="add_pokemon"),
     path("pokemon/<int:id>/edit/", views.edit_pokemon, name="edit_pokemon"),
     path("pokemon/<int:id>/delete/", views.delete_pokemon, name="delete_pokemon"),
