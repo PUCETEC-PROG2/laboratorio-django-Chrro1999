@@ -10,9 +10,21 @@
     </head>
     <body>
         <div class="container">
-            <div class="bg-primary text-white p-4 text-center">
-                <img src="{% static 'pokedex-logo.png' %}" alt="Pokedex logo" class="img-fluid">
-            </div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'pokedex-logo.png' %}" alt="Pokedex logo" style="height:40px;"></a>
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav ms-auto">
+                            {% if user.is_authenticated %}
+                                <li class="nav-item"><span class="nav-link">Hola, {{ user.username }}</span></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                            {% else %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
             {% block content %}{% endblock content %}
         </div>
     </body>

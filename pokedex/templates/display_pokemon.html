@@ -21,4 +21,21 @@
 </ul>
 
 <a href="{% url 'index' %}" class="btn btn-secondary">Volver al inicio</a>
+<a href="{% url 'edit_pokemon' pokemon.id %}" class="btn btn-warning">Editar</a>
+
+{% if confirm_delete %}
+    <div class="alert alert-danger mt-3">
+        <p>¿Estás seguro que quieres eliminar a <strong>{{ pokemon.name }}</strong>?</p>
+        <form method="post" action="{{ delete_url }}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a href="{% url 'pokemon' pokemon.id %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+{% else %}
+    <form method="post" action="{% url 'delete_pokemon' pokemon.id %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Eliminar este Pokémon? Esta acción no se puede deshacer.');">Eliminar</button>
+    </form>
+{% endif %}
 {% endblock content %}

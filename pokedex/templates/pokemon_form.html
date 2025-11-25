@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Agregar Pokémon</h2>
+    <h2>{{ title|default:"Agregar Pokémon" }}</h2>
     <form method="post" enctype="multipart/form-data" class="mt-3">
         {% csrf_token %}
         <div class="mb-3">
@@ -46,7 +46,7 @@
             {% endif %}
         </div>
 
-        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Agregar</button>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> {{ submit_label|default:"Agregar" }}</button>
         <a href="{% url 'pokedex' %}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
