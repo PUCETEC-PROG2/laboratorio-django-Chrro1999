@@ -16,12 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
 from django.conf.urls.static import static
+from oauth2_provider import urls as oauth2_urls
+from django.conf import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('pokedex.urls'))
+    path('', include('pokedex.urls')),
+    path('api/', include('api.urls')),
+    path('o/', include(oauth2_urls)),
 ]
 
 # Serve static and media files during development (DEBUG = True)
@@ -31,3 +35,5 @@ if settings.DEBUG:
     # Static files (from STATIC_ROOT). Django's staticfiles app also serves app/static when DEBUG=True,
     # but adding this ensures files collected to STATIC_ROOT are served too.
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    
+    
